@@ -1,0 +1,2 @@
+class TournamentNotFound(Exception):
+    pass

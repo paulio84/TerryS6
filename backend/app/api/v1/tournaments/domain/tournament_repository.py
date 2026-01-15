@@ -13,9 +13,9 @@ class ITournamentRepository(ABC):
         pass
 
     @abstractmethod
-    async def get_by_id(self, id: int) -> Tournament | None:
+    async def get_by_id(self, id: int) -> tuple[int, Tournament] | None:
         pass
 
     @abstractmethod
-    async def get_all(self) -> list[Tournament]:
+    async def get_all(self) -> list[tuple[int, Tournament]]:
         pass
