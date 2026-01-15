@@ -1,20 +1,21 @@
 from abc import ABC, abstractmethod
 
-from backend.app.api.v1.tournaments.domain.tournament import Tournament
+from .tournament import Tournament
 
 
 class ITournamentRepository(ABC):
     @abstractmethod
-    def add(self) -> Tournament:
+    async def add(self, tournament: Tournament) -> int:
         pass
 
     @abstractmethod
-    def delete(self) -> None:
+    async def delete_by_id(self, id: int) -> None:
         pass
 
     @abstractmethod
-    def get_by_id(self) -> Tournament | None:
+    async def get_by_id(self, id: int) -> Tournament | None:
         pass
 
-    def get_all(self) -> list[Tournament]:
+    @abstractmethod
+    async def get_all(self) -> list[Tournament]:
         pass
