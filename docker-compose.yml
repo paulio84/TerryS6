@@ -13,5 +13,15 @@ services:
     volumes:
       - terrys6-data:/var/lib/postgresql/data
 
+  backend:
+    build: ./backend
+    depends_on:
+      - db
+    ports:
+      - '8000:8000'
+    env_file:
+      - .env
+
+
 volumes: 
   terrys6-data:
