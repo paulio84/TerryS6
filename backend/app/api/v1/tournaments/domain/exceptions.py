@@ -1,6 +1,10 @@
-class InvalidTournamentDates(Exception):
+class DomainException(Exception):
     pass
 
 
-class TournamentNameRequired(Exception):
+class InvalidTournamentDates(DomainException):
+    pass
+
+
+class TournamentNameRequired(DomainException):
     pass

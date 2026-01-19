@@ -1,3 +1,5 @@
+from kink import inject
+
 from backend.app.api.v1.tournaments.application.exceptions import TournamentNotFound
 from backend.app.api.v1.tournaments.domain.tournament import Tournament
 from backend.app.api.v1.tournaments.domain.tournament_repository import (
@@ -7,6 +9,7 @@ from backend.app.api.v1.tournaments.domain.tournament_repository import (
 from .dto import CreateTournamentRequest, TournamentResponse
 
 
+@inject
 class TournamentService:
     """
     A tournament service to create, list, get and delete tournaments.
@@ -28,7 +31,7 @@ class TournamentService:
             end_date=tournament.end_date,
         )
 
-    async def list_tournaments(self) -> list[TournamentResponse]:
+    async def get_tournaments(self) -> list[TournamentResponse]:
         return [
             TournamentResponse(
                 id=tournament_id,
@@ -39,7 +42,7 @@ class TournamentService:
             for tournament_id, tournament in await self._repository.get_all()
         ]
 
-    async def get_tournament(self, id: int) -> TournamentResponse:
+    async def get_tournament_by_id(self, id: int) -> TournamentResponse:
         tournament_in_db: (
             tuple[int, Tournament] | None
         ) = await self._repository.get_by_id(id)
@@ -55,5 +58,5 @@ class TournamentService:
             end_date=tournament.end_date,
         )
 
-    async def delete_tournament(self, id: int) -> None:
+    async def delete_tournament_by_id(self, id: int) -> None:
         await self._repository.delete_by_id(id)

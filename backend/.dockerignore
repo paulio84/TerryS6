@@ -1,0 +1,4 @@
+tests/
+Dockerfile
+README.md
+.dockerignore

@@ -1,2 +1,6 @@
-class TournamentNotFound(Exception):
+class ApplicationException(Exception):
+    pass
+
+
+class TournamentNotFound(ApplicationException):
     pass
