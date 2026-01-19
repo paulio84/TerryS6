@@ -1,15 +1,3 @@
-from kink import di
+from .dependencies import bootstrap_dependencies
 
-from backend.app.api.v1.tournaments.application.tournament_service import (
-    TournamentService,
-)
-from backend.app.api.v1.tournaments.domain.tournament_repository import (
-    ITournamentRepository,
-)
-from backend.app.api.v1.tournaments.infrastructure.in_memory_tournament_repository import (
-    InMemoryTournamentRepository,
-)
-
-repository = InMemoryTournamentRepository()
-di[ITournamentRepository] = repository
-di[TournamentService] = TournamentService(repository)
+bootstrap_dependencies()

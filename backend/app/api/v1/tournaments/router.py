@@ -1,17 +1,8 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, status
 from kink import di
 
-from backend.app.api.v1.tournaments.application.dto import (
-    CreateTournamentRequest,
-    TournamentResponse,
-)
-from backend.app.api.v1.tournaments.application.tournament_service import (
-    TournamentService,
-)
-from backend.app.api.v1.tournaments.domain.exceptions import (
-    InvalidTournamentDates,
-    TournamentNameRequired,
-)
+from .schemas import CreateTournamentRequest, TournamentListResponse, TournamentResponse
+from .service import TournamentService
 
 router = APIRouter()
 
@@ -29,20 +20,32 @@ async def create_tournament(
     request: CreateTournamentRequest,
     service: TournamentService = Depends(get_tournament_service),
 ) -> TournamentResponse:
-    try:
-        return await service.create_tournament(request)
-    except TournamentNameRequired as ex:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(ex))
-    except InvalidTournamentDates as ex:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(ex))
+    tournament_to_create = request.to_dto()
+    tournament_dto = await service.create_tournament(tournament_to_create)
+    return TournamentResponse.from_dto(dto=tournament_dto)
 
 
 @router.get(
     "/tournaments",
     status_code=status.HTTP_200_OK,
-    response_model=list[TournamentResponse],
+    response_model=TournamentListResponse,
 )
 async def get_tournaments(
     service: TournamentService = Depends(get_tournament_service),
-) -> list[TournamentService]:
-    return await service.get_tournaments()
+) -> TournamentListResponse:
+    tournament_list_dto = await service.get_tournaments()
+    return TournamentListResponse.from_dto(dto=tournament_list_dto)
+
+
+@router.get(
+    "/tournaments/{tournament_id}",
+    status_code=status.HTTP_200_OK,
+    response_model=TournamentResponse,
+)
+async def get_tournament(
+    tournament_id: int,
+    service: TournamentService = Depends(get_tournament_service),
+) -> TournamentResponse:
+    return TournamentResponse.from_dto(
+        dto=await service.get_tournament_by_id(tournament_id)
+    )
