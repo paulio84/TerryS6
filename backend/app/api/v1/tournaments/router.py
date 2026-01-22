@@ -49,3 +49,13 @@ async def get_tournament(
     return TournamentResponse.from_dto(
         dto=await service.get_tournament_by_id(tournament_id)
     )
+
+
+@router.delete(
+    "/tournaments/{tournament_id}",
+    status_code=status.HTTP_204_NO_CONTENT,
+)
+async def delete_tournament(
+    tournament_id: int, service: TournamentService = Depends(get_tournament_service)
+) -> None:
+    return await service.delete_tournament_by_id(tournament_id)
