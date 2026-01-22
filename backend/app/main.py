@@ -1,11 +1,24 @@
+import os
+
 from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from .api.v1.tournaments.exceptions import DomainException
 from .api.v1.tournaments.router import router as tournament_router
 
+cors_origins = os.getenv("CORS_ORIGINS", "").split(",")
+
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=cors_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/api/health")

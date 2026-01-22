@@ -12,12 +12,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/{{version}}/tournaments",
+					"raw": "{{url}}/{{api_version}}/tournaments",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"{{version}}",
+						"{{api_version}}",
 						"tournaments"
 					]
 				}
@@ -39,12 +39,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/{{version}}/tournaments",
+					"raw": "{{url}}/{{api_version}}/tournaments",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"{{version}}",
+						"{{api_version}}",
 						"tournaments"
 					]
 				}
@@ -57,12 +57,31 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/{{version}}/tournaments/1",
+					"raw": "{{url}}/{{api_version}}/tournaments/1",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"{{version}}",
+						"{{api_version}}",
+						"tournaments",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Tournament By ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/{{api_version}}/tournaments/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{api_version}}",
 						"tournaments",
 						"1"
 					]
