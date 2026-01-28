@@ -8,7 +8,12 @@ import './index.css'
 import Layout from './layouts/Layout'
 // pages
 import LeagueTable from './pages/LeagueTable'
-import TournamentsPage, { createTournamentsAction, tournamentsLoader } from './pages/tournaments/TournamentsPage'
+import TournamentsPage, {
+  createTournamentsAction,
+  deleteTournamentAction,
+  tournamentsLoader,
+} from './pages/tournaments/TournamentsPage'
+import ErrorPage from './pages/ErrorPage'
 
 const router = createBrowserRouter([
   {
@@ -17,13 +22,21 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <LeagueTable />
+        element: <LeagueTable />,
+        errorElement: <ErrorPage />,
       },
       {
         path: "tournaments",
         element: <TournamentsPage />,
+        errorElement: <ErrorPage />,
         loader: tournamentsLoader,
-        action: createTournamentsAction
+        action: createTournamentsAction,
+        children: [
+          {
+            path: ":id/delete",
+            action: deleteTournamentAction,
+          }
+        ]
       }
     ]
   }

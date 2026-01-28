@@ -24,3 +24,14 @@ export async function createTournament(payload: CreateTournamentDTO): Promise<vo
     throw new Error("There was an error creating the tournament.")
   }
 }
+
+export async function deleteTournament(id: Number): Promise<void> {
+  const url = `${API_BASE_URL}/tournaments/${id}`
+  const response = await fetch(url, { method: "DELETE" })
+
+  if (!response.ok) {
+    const data = await response.json()
+    console.log("--", data)
+    throw new Error("Failed to delete tournament.")
+  }
+}
