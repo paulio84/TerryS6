@@ -8,7 +8,7 @@ import './index.css'
 import Layout from './layouts/Layout'
 // pages
 import LeagueTable from './pages/LeagueTable'
-import Tournaments from './pages/Tournaments'
+import TournamentsPage, { createTournamentsAction, tournamentsLoader } from './pages/tournaments/TournamentsPage'
 
 const router = createBrowserRouter([
   {
@@ -21,7 +21,9 @@ const router = createBrowserRouter([
       },
       {
         path: "tournaments",
-        element: <Tournaments />
+        element: <TournamentsPage />,
+        loader: tournamentsLoader,
+        action: createTournamentsAction
       }
     ]
   }
