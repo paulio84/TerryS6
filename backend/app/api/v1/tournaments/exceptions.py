@@ -5,10 +5,6 @@ class DomainException(Exception):
         return self._status_code
 
 
-class InvalidTournamentDates(DomainException):
-    _status_code = 400
-
-
 class TournamentNameRequired(DomainException):
     _status_code = 400
 

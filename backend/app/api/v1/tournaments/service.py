@@ -26,6 +26,8 @@ class TournamentService:
                 f"A tournament with the name: '{tournament_to_create.name}', already exists."
             )
 
+        tournament_to_create.create_slug_from_name()
+
         return await self._repository.add(tournament_to_create)
 
     async def get_tournaments(self) -> TournamentListDTO:

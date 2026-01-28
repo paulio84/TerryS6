@@ -6,16 +6,19 @@ from datetime import date
 class TournamentDTO:
     id: int
     name: str
-    start_date: date
+    slug: str
     end_date: date
-    is_active: bool
 
 
-@dataclass(frozen=True)
+@dataclass
 class CreateTournamentDTO:
     name: str
-    start_date: date
     end_date: date
+    slug: str | None = None
+
+    def create_slug_from_name(self) -> None:
+        name_pieces = self.name.split()
+        self.slug = "-".join(name_piece.lower() for name_piece in name_pieces)
 
 
 @dataclass(frozen=True)

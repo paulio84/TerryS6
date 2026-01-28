@@ -36,9 +36,8 @@ class InMemoryTournamentRepository(ITournamentRepository):
         tournament_to_store = TournamentDTO(
             id=id,
             name=tournament.name,
-            start_date=tournament.start_date,
+            slug=tournament.slug,
             end_date=tournament.end_date,
-            is_active=False,
         )
         self.data[id] = tournament_to_store
         self.next_id += 1
