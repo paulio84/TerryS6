@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import type { Tournament } from "./types"
 import { getTournaments } from "../../api/tournaments"
 
+// TODO: THIS WILL LIKELY BE REMOVED
+
 function TournamentList() {
   const [tournaments, setTournaments] = useState<Tournament[]>([])
   const [loading, setLoading] = useState<boolean>(true)
