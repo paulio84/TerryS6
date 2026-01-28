@@ -3,10 +3,10 @@ import { Link, NavLink } from "react-router-dom";
 export default function Header() {
   return (
     <header>
-      <Link className="site-logo" to="/">TerryS6</Link>
+      <Link to="/">TerryS6</Link>
       <nav>
-        <NavLink to="/">My Predictions</NavLink>  {/* TODO: UPDATE THESE LINKS */}
-        <NavLink to="/">Sign Out</NavLink>
+        <NavLink to="/tournaments">Tournaments</NavLink>
+        <NavLink to="/">Sign Out</NavLink>{/* TODO: UPDATE THIS LINKS */}
       </nav>
     </header>
   )
